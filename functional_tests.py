@@ -27,6 +27,7 @@ class NewVisitorTest(unittest.TestCase):
         self.fail("Finish the test!")  
 
         [...]
+        
 
         # Satisfied, she goes back to sleep
 
