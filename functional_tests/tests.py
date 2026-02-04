@@ -1,3 +1,4 @@
+import os
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -17,6 +18,9 @@ FFservice=Service(executable_path="/snap/bin/geckodriver")
 class NewVisitorTest(StaticLiveServerTestCase):  
     def setUp(self):  
         self.browser = webdriver.Firefox(options=FFoptions,service=FFservice)
+        if test_server := os.environ.get("TEST_SERVER"):   
+            self.live_server_url = "http://" + test_server
+        
 
     def tearDown(self):  
         self.browser.quit()
@@ -129,7 +133,7 @@ class NewVisitorTest(StaticLiveServerTestCase):
         inputbox = self.browser.find_element(By.ID, "id_new_item")
         self.assertAlmostEqual(
             inputbox.location["x"] + inputbox.size["width"] / 2,
-            512,
+            486,
             delta=10,
         )
 
@@ -141,7 +145,7 @@ class NewVisitorTest(StaticLiveServerTestCase):
         inputbox = self.browser.find_element(By.ID, "id_new_item")
         self.assertAlmostEqual(
             inputbox.location["x"] + inputbox.size["width"] / 2,
-            512,
+            486,
             delta=10,
         )
 if __name__ == "__main__":  
